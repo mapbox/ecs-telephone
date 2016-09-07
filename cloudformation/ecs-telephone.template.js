@@ -12,7 +12,8 @@ const watcher = watchbot.template({
   serviceVersion: cf.ref('GitSha'),
   workers: 1,
   reservation: { cpu: 256 },
-  env: { StackRegion: cf.region }
+  env: { StackRegion: cf.region },
+  notificationEmail: 'devnull@mapbox.com'
 });
 
 module.exports = watchbot.merge({ Parameters }, watcher);
