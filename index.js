@@ -14,8 +14,9 @@ const words = message.split(' ');
 words[Math.floor(Math.random() * (words.length + 1))] = random(1)[0];
 const Message = words.join(' ');
 
-const publish = sns.publish({ TopicArn, Subject, Message });
-
-publish.promise()
-  .then(() => watchbot.log(`${Subject}: ${Message}`))
-  .catch(err => watchbot.log(err));
+setTimeout(() => {
+  const publish = sns.publish({ TopicArn, Subject, Message });
+  publish.promise()
+    .then(() => watchbot.log(`${Subject}: ${Message}`))
+    .catch(err => watchbot.log(err));
+}, 60000);
