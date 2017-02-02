@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const watchbot = require('watchbot');
+const watchbot = require('@mapbox/watchbot');
 const AWS = require('aws-sdk');
 const random = require('random-words');
 

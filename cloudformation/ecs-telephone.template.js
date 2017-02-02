@@ -1,4 +1,4 @@
-const watchbot = require('watchbot');
+const watchbot = require('@mapbox/watchbot');
 const cf = require('cloudfriend');
 
 const Parameters = {
