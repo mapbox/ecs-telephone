@@ -10,9 +10,9 @@ const watcher = watchbot.template({
   cluster: cf.ref('Cluster'),
   service: 'ecs-telephone',
   serviceVersion: cf.ref('GitSha'),
-  workers: 1,
+  workers: 10000,
   watchbotVersion: 'ac868ff3360e794c7a8edd403bd7dcb62a82e1e2',
-  reservation: { cpu: 256, memory: 128 },
+  reservation: { cpu: 2560, memory: 1280 },
   env: { StackRegion: cf.region },
   notificationEmail: 'devnull@mapbox.com'
 });
