@@ -19,4 +19,10 @@ const Message = words.join(' ');
 // publish.promise()
 Promise.resolve()
   .then(() => watchbot.log(`${Subject}: ${Message}`))
-  .catch(err => watchbot.log(err));
+  .catch(err => watchbot.log(err))
+  .then(() => {
+    if (Math.random() > 0.7) {
+      console.log('Lost the lottery!');
+      process.exit(1);
+    }
+  });
