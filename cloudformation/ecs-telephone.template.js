@@ -14,7 +14,7 @@ const watcher = watchbot.template({
   reservation: { cpu: 256, memory: 128 },
   env: { StackRegion: cf.region },
   notificationEmail: 'devnull@mapbox.com',
-  watchbotVersion: 'b525fccade5db53f54b9892febc330695f2a172d'
+  watchbotVersion: '18b94241ec8575531cf94934fb747912a737be39'
 });
 
 module.exports = watchbot.merge({ Parameters }, watcher);
