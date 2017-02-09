@@ -11,7 +11,7 @@ const watcher = watchbot.template({
   service: 'ecs-telephone',
   serviceVersion: cf.ref('GitSha'),
   workers: 10000,
-  watchbotVersion: '47d881732f93ed2033bf3792746ce3d16032f357',
+  watchbotVersion: 'ae362c2fddf701a348db50494bc8bc052ac453ca',
   reservation: { cpu: 2560, memory: 1280 },
   env: { StackRegion: cf.region },
   notificationEmail: 'devnull@mapbox.com'
