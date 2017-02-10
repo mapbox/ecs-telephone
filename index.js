@@ -16,6 +16,11 @@ const Message = words.join(' ');
 
 // const publish = sns.publish({ TopicArn, Subject, Message });
 
+watchbot.log(require('fs').existsSync('/mnt/tmp/emdb')); // logged `true`
+watchbot.log(require('fs').readdirSync('/mnt/tmp/emdb')); // logged `[]`
+require('fs').writeFileSync('/mnt/tmp/emdb/test.txt', 'test string');
+watchbot.log(require('fs').readdirSync('/mnt/tmp/emdb')); // logged `test.txt`
+
 // publish.promise()
 Promise.resolve()
   .then(() => watchbot.log(`${Subject}: ${Message}`))
