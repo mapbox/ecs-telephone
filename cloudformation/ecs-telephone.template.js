@@ -16,7 +16,10 @@ const watcher = watchbot.template({
   watchers: 2,
   reservation: { cpu: 256, memory: 128 },
   env: { StackRegion: cf.region },
-  notificationEmail: cf.ref('AlarmEmail')
+  notificationEmail: cf.ref('AlarmEmail'),
+  exponentialBackoff: false,
+  errorThreshold: 2,
+  alarmOnEachFailure: true
 });
 
 module.exports = watchbot.merge({ Parameters }, watcher);
