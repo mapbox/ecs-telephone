@@ -14,9 +14,9 @@ const watcher = watchbot.template({
   workers: 1,
   reservation: { cpu: 256, memory: 128 },
   mounts: {
-    container: [cf.sub('/mnt/tmp/${volume}', { volume: cf.ref(VolumeName) })],
+    container: [cf.sub('/mnt/tmp/${volume}', { volume: cf.ref('VolumeName') })],
     host: ['']
-  }
+  },
   env: { StackRegion: cf.region },
   notificationEmail: 'devnull@mapbox.com',
   watchbotVersion: '1d94902f7ea2a58764bdea1fd5304fcae6485bec'
