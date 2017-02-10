@@ -11,15 +11,13 @@ const watcher = watchbot.template({
   cluster: cf.ref('Cluster'),
   service: 'ecs-telephone',
   serviceVersion: cf.ref('GitSha'),
-  watchbotVersion: 'f6466a76daee447a1929dbd5d069821ac476d685',
+  watchbotVersion: '5984a62543dd769f86513735979dc0375cc69fde',
   workers: 2,
   watchers: 2,
   reservation: { cpu: 256, memory: 128 },
   env: { StackRegion: cf.region },
   notificationEmail: cf.ref('AlarmEmail'),
-  exponentialBackoff: false,
-  errorThreshold: 2,
-  alarmOnEachFailure: true
+  errorThreshold: 2
 });
 
 module.exports = watchbot.merge({ Parameters }, watcher);
