@@ -23,7 +23,7 @@ Promise.resolve()
   .then(() => new Promise((resolve) => setTimeout(resolve, Math.random() * 1000)))
   .then(() => {
     if (Math.random() > -1) {
-      console.log('Lost the lottery!');
+      watchbot.log('Lost the lottery!');
       process.exit(1);
     }
   });
