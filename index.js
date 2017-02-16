@@ -25,4 +25,4 @@ Promise.resolve()
     if (Math.random() > 0.8) {
       setTimeout(resolve, 1000 * 60 * 60 * 2);
     }
-  });
+  }));
