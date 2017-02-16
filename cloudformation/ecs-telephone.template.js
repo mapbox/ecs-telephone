@@ -11,7 +11,7 @@ const watcher = watchbot.template({
   cluster: cf.ref('Cluster'),
   service: 'ecs-telephone',
   serviceVersion: cf.ref('GitSha'),
-  workers: 250,
+  workers: 100,
   watchers: 3,
   reservation: { cpu: 256, memory: 128 },
   env: { StackRegion: cf.region },
