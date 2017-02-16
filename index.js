@@ -20,9 +20,9 @@ const Message = words.join(' ');
 Promise.resolve()
   .then(() => watchbot.log(`${Subject}: ${Message}`))
   .catch(err => watchbot.log(err))
-  .then(() => new Promise((resolve) => setTimeout(resolve, Math.random() * 1000)))
+  .then(() => new Promise((resolve) => setTimeout(resolve, Math.random() * 1000 * 60 * 3 + 30 * 1000)))
   .then(() => {
-    if (Math.random() > -1) {
+    if (Math.random() > 0.8) {
       watchbot.log('Lost the lottery!');
       process.exit(1);
     }
