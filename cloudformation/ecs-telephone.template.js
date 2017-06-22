@@ -1,5 +1,5 @@
 const watchbot = require('@mapbox/watchbot');
-const cf = require('cloudfriend');
+const cf = require('@mapbox/cloudfriend');
 
 const Parameters = {
   GitSha: { Type: 'String' },
