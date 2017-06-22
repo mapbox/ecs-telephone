@@ -55,31 +55,48 @@ more
 
 </details>
 
-### 3. Find the Queue URL
+### 3. Send a message
 
-ecs-watchbot stacks listen for messages in a queue, this queue has a URL for you to send SNS messages to. Any messages in that queue will be handled by your new stack's entrypoint specified in the Dockerfile - eg `CMD ["./index.js"]`. You can find the Queue URL for your new stack with the `mbx info>` command.
+Each ecs-watchbot stack has a queue that it listens to. You can find this queue in the [SQS dashboard](https://console.aws.amazon.com/sqs/home?region=us-east-1). Search for your stack (called `ecs-telephone-<something>`). A) Select the stack and then B) click the "Queue Actions" dropdown. C) Press "Send a Message" and add a JSON formatted message like this:
 
-```bash
-mbx info <stack_name>
+```JSON
+{
+  "Subject": "Your subject",
+  "Message": "Your random message to be garbled"
+}
 ```
 
-It will output a sizeable JSON object. Look for `WatchbotQueueUrl` and you'll see a URI that looks something like this:
+![abc](https://user-images.githubusercontent.com/1943001/27412508-f6b79500-56a9-11e7-8e03-6c881fe45748.png)
+
+### 4. View logs
 
 ```
-https://sqs.us-east-1.amazonaws.com/234858372212/ecs-telephone-howdy-WatchbotQueue
+mbx logs <stack>
 ```
 
-That's your Queue URL. **Copy it**.
-
-### 4. Send a message
-
-Send a message using the AWS CLI `aws sns` command with the URL copied from above
-
-```bash
-aws sqs send-message \
-  --queue-url https://sqs.us-east-1.amazonaws.com/234858372212/ecs-telephone-howdy-WatchbotQueue \ --message-body "hello how may I help you"
+```
+[Thu, 22 Jun 2017 00:30:38 GMT] [watchbot] [68111482-ab11-48b3-b292-6c5dbf22c54e] {"subject":"Attention","message":"make sure to water the plants","receives":"1"}
+[Thu, 22 Jun 2017 00:30:52 GMT] [worker] [68111482-ab11-48b3-b292-6c5dbf22c54e] Attention: make sure to locate the plants
 ```
 
-### 5. View logs
+With the final worker logs looking like this after sending the message `make sure to water the plants`:
 
-Now check out the logs
+```
+Attention: make sure to locate the plants
+Attention: make sure to locate the plants grass
+Attention: material sure to locate the plants grass
+Attention: material sure to locate the farther grass
+Attention: material sure union locate the farther grass
+Attention: material sure union locate pale farther grass
+Attention: capital sure union locate pale farther grass
+Attention: capital sure union locate brought farther grass
+Attention: capital sure union locate brought farther grass central
+```
+
+### 5. Delete the stack
+
+This stack continues to send messages back to itself and will never stop until we remove it. Once you've seen the logs, make sure to delete the entire stack!
+
+```
+mbx delete <stack>
+```
