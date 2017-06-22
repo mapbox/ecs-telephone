@@ -10,9 +10,8 @@ Ever played the game "Telephone"? It takes in a message, replaces a word, then s
 
 Assumes you have:
 
-* the Mapbox CLI installed
+* mbxcli installed
 * authorized your shell with `mbx auth`
-* have the AWS CLI installed
 
 ### 1. Clone this repository
 
