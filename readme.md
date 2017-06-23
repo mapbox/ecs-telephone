@@ -8,10 +8,11 @@ Ever played the game "Telephone"? It takes in a message, replaces a word, then s
 
 # How to spin it up
 
-Assumes you have:
+### 0. Requirements
 
-* mbxcli installed
-* authorized your shell with `mbx auth`
+**cfn-config**: All of this requires you to be authenticated with an AWS account. The following steps will use a tool called `cfn-config`, which enables you to deploy services via cloudformation. [Read the docs](https://github.com/mapbox/cfn-config) on how to set up and authenticate your environment.
+
+**an ECS cluster**: ecs-watchbot requires an ECS cluster to work. Learn more about [ECS clusters on AWS](https://aws.amazon.com/ecs/).
 
 ### 1. Clone this repository
 
@@ -23,22 +24,22 @@ cd ecs-telephone
 ### 2. Create a new stack
 
 ```bash
-mbx create <stack_name>
+cfn-config create <stack_name>
 ```
 
 This will create a new stack with all of the resources specified by ecs-watchbot. It will ask for two inputs:
 
 1. GitSha - default to the current local git tree (you can just press enter)
-1. Cluster - this needs to be the Cluster ARN where you want the stack to be located. You can find the different clusters in the AWS console, but for now stick with the ecs-processing-staging cluster: `arn:aws:ecs:us-east-1:234858372212:cluster/ecs-cluster-processing-staging-Cluster-1CPP4EZCMP3VI`.
+1. Cluster - this needs to be the ECS Cluster ARN where you want the stack to be located - this looks like `arn:aws:ecs:us-east-1:...`.
 
 <details>
 <summary>You'll see logs like this...</summary>
 
-<pre></code>~/mapbox/ecs-telephone[master]$ mbx create howdy
+<pre></code>~/mapbox/ecs-telephone[master]$ cfn-config create howdy
 23:28:03Z us-east-1: creating stack ecs-telephone-howdy
 ? Saved configurations New configuration
 ? GitSha: 87bb477ec710c8f7226b364dd465fa1a30227726
-? Cluster: arn:aws:ecs:us-east-1:234858372212:cluster/ecs-cluster-processing-staging-Cluster-1CPP4EZCMP3VI
+? Cluster: arn:aws:ecs:us-east-1:....
 ? Ready to create the stack? Yes
 23:28:15Z us-east-1: CREATE_IN_PROGRESS ecs-telephone-howdy: User Initiated
 23:28:17Z us-east-1: CREATE_IN_PROGRESS WatchbotDeadLetterQueue
@@ -69,16 +70,14 @@ Each ecs-watchbot stack has a queue that it listens to. You can find this queue 
 
 ### 4. View logs
 
-```
-mbx logs <stack>
-```
+Logs are viewable through the AWS console via CloudWatch. You can find the LogGroup associated to your service named something like `ecs-telephone-<stack>-us-east-1-...`. Clicking this group will show you a number of LogStreams which are logs from individual tasks run by your watchbot service. Each task will have logs that look something like this:
 
 ```
 [Thu, 22 Jun 2017 00:30:38 GMT] [watchbot] [68111482-ab11-48b3-b292-6c5dbf22c54e] {"subject":"Attention","message":"make sure to water the plants","receives":"1"}
 [Thu, 22 Jun 2017 00:30:52 GMT] [worker] [68111482-ab11-48b3-b292-6c5dbf22c54e] Attention: make sure to locate the plants
 ```
 
-With the final worker logs looking like this after sending the message `make sure to water the plants`:
+If you were to stitch the logs together, you'd see your telephone message distort like this (after sending `make sure to water the plants` as the original message):
 
 ```
 Attention: make sure to locate the plants
@@ -97,5 +96,5 @@ Attention: capital sure union locate brought farther grass central
 This stack continues to send messages back to itself and will never stop until we remove it. Once you've seen the logs, make sure to delete the entire stack!
 
 ```
-mbx delete <stack>
+cfn-config delete <stack>
 ```
