@@ -1,4 +1,4 @@
-var cf = require('cloudfriend');
+var cf = require('@mapbox/cloudfriend');
 var tape = require('tape');
 var path = require('path');
 
