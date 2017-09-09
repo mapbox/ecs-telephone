@@ -7,7 +7,7 @@ const Parameters = {
 };
 
 const watcher = watchbot.template({
-  cluster: cf.ref('Cluster'),
+  cluster: cf.importValue(cf.sub('${Cluster}-cluster-arn')),
   service: 'ecs-telephone',
   serviceVersion: cf.ref('GitSha'),
   workers: 1,
