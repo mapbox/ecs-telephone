@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/mapbox/ecs-telephone#readme",
   "devDependencies": {
-    "@mapbox/categorizer": "^1.2.0",
     "eslint": "^3.4.0",
     "nyc": "^8.1.0",
     "opener": "^1.4.1",
