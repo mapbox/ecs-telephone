@@ -14,6 +14,10 @@ const watcher = watchbot.template({
   serviceVersion: cf.ref('GitSha'),
   workers: 1,
   reservation: { cpu: 256, memory: 128 },
+  placementConstraints: [{
+    Type: 'memberOf',
+    Expression: 'attribute:availableDiskSpace >= 10'
+  }],
   env: { StackRegion: cf.region },
   notificationEmail: 'devnull@mapbox.com'
 });
