@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@mapbox/cloudfriend": "^1.9.0",
-    "@mapbox/watchbot": "^3.2.1",
+    "@mapbox/watchbot": "https://mapbox-npm.s3.amazonaws.com/package/mapbox-watchbot-v3.4.1-7-g1c8fdc5-7309cbad9ecec96e6254e8f12d1ed38d8f87ab60.tgz",
     "aws-sdk": "^2.112.0",
     "random-words": "0.0.1"
   }
