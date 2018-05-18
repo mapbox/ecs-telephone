@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-const watchbot = require('@mapbox/watchbot');
 const AWS = require('aws-sdk');
 const random = require('random-words');
 
@@ -17,5 +16,5 @@ const Message = words.join(' ');
 const publish = sns.publish({ TopicArn, Subject, Message });
 
 publish.promise()
-  .then(() => watchbot.log(`${Subject}: ${Message}`))
-  .catch(err => watchbot.log(err));
+  .then(() => console.log(`${Subject}: ${Message}`))
+  .catch(err => console.log(err));
