@@ -10,9 +10,19 @@ const Subject = process.env.Subject;
 const message = process.env.Message;
 const sns = new AWS.SNS({ region });
 
+const fs = require('fs');
+
 const words = message.split(' ');
 words[Math.floor(Math.random() * (words.length + 1))] = random(1)[0];
 const Message = words.join(' ');
+
+watchbot.log('Let\'s write to the /tmp directory');
+
+fs.write('/tmp/file.txt', 'can i write here?');
+
+watchbot.log('Let\'s write to the /mnt directory');
+
+fs.write('/mnt/file.txt', 'can i write here?');
 
 const publish = sns.publish({ TopicArn, Subject, Message });
 
