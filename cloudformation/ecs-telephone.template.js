@@ -19,4 +19,4 @@ const watcher = watchbot.template({
   notificationEmail: 'devnull@mapbox.com'
 });
 
-module.exports = watchbot.merge({ Parameters }, watcher);
+module.exports = cf.merge({ Parameters }, watcher);
