@@ -9,6 +9,6 @@ RUN apt-get update -qq && \
 
 COPY package.json ./
 RUN npm install --production
-RUN npm install -g https://github.com/mapbox/ecs-watchbot/tarball/container-recycling
+RUN npm install -g https://github.com/mapbox/ecs-watchbot/tarball/any-volume
 
 COPY index.js ./
