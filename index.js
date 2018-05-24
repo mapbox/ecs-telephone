@@ -19,11 +19,11 @@ const Message = words.join(' ');
 
 logger.log('Let\'s write to the /tmp directory');
 
-fs.write('/tmp/file.txt', 'can i write here?');
+fs.writeFileSync('/tmp/file.txt', 'can i write here?');
 
 logger.log('Let\'s write to the /mnt directory');
 
-fs.write('/mnt/file.txt', 'can i write here?');
+fs.writeFileSync('/mnt/file.txt', 'can i write here?');
 
 const publish = sns.publish({ TopicArn, Subject, Message });
 
