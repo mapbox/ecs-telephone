@@ -9,5 +9,6 @@ RUN apt-get update -qq && \
 
 COPY package.json ./
 RUN npm install --production
+RUN npm install @mapbox/watchbot -g
 
 COPY index.js ./
