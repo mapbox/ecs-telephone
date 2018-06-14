@@ -25,6 +25,10 @@ logger.log('Let\'s write to the /mnt directory');
 
 fs.writeFileSync('/mnt/file.txt', 'can i write here?');
 
+logger.log('Let\'s write to the /usr directory');
+
+fs.writeFileSync('/usr/file.txt', 'can i write here?');
+
 const publish = sns.publish({ TopicArn, Subject, Message });
 
 publish.promise()
