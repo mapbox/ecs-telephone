@@ -12,7 +12,7 @@ const watcher = watchbot.template({
   service: 'ecs-telephone',
   family: cf.ref('Family'),
   serviceVersion: cf.ref('GitSha'),
-  command: ['./index.js'],
+  command: ['./index.sh'],
   workers: 1,
   reservation: { cpu: 256, memory: 128 },
   env: { StackRegion: cf.region },
