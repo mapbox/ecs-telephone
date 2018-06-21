@@ -12,10 +12,11 @@ const watcher = watchbot.template({
   service: 'ecs-telephone',
   family: cf.ref('Family'),
   serviceVersion: cf.ref('GitSha'),
-  workers: 1,
+  command: ['./index.js'],
+  minSize: 1,
   reservation: { cpu: 256, memory: 128 },
   env: { StackRegion: cf.region },
   notificationEmail: 'devnull@mapbox.com'
 });
 
-module.exports = watchbot.merge({ Parameters }, watcher);
+module.exports = cf.merge({ Parameters }, watcher);
