@@ -26,23 +26,24 @@ const Resources = {
   MathLambda: {
     Type: 'AWS::Lambda::Function',
     Properties: {
-      Handler: index.Handler,
-      Role: cf.ref(prefixed('ScalingMathRole')),
-      Code:
+      Handler: 'index.Handler',
+      Role: cf.ref('MathRole'),
+      Code: {
         ZipFile: cf.sub(`
           var response = require('cfn-response');
           exports.handler = function(event,context){
-            var result = Math.min(parseInt(${options.ResourceProperties.max}) / 10, 100)
+            var result = Math.min(parseInt(${cf.ref(Parameters.maxSize)}) / 10, 100)
             response.send(event, context, response.SUCCESS, {Value: Result})
           }
           `),
-      Runtime: nodejs
+      },
+      Runtime: 'nodejs6.10'
     }
   },
   customMathResource: {
     Type: 'AWS::CloudFormation::CustomResource',
     Properties: {
-      ServiceToken: cf.getAtt(prefixed('MathLambda'), 'Arn'),
+      ServiceToken: cf.getAtt('MathLambda', 'Arn'),
       max: cf.ref('maxSize')
     }
   }
