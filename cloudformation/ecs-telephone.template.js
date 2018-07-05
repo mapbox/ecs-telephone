@@ -4,7 +4,48 @@ const cf = require('@mapbox/cloudfriend');
 const Parameters = {
   GitSha: { Type: 'String' },
   Cluster: { Type: 'String' },
-  Family: { Type: 'String' }
+  Family: { Type: 'String' },
+  maxSize: { Type: 'Number' }
+};
+
+const Resources = {
+  MathRole: {
+    Type: 'AWS::IAM::Role',
+    Properties: {
+      AssumeRolePolicyDocument: {
+        Statement: [
+          {
+            Effect: 'Allow',
+            Principal: { Service: ['lambda.amazonaws.com'] },
+            Action: ['sts:AssumeRole']
+          }
+        ]
+      }
+    }
+  },
+  MathLambda: {
+    Type: 'AWS::Lambda::Function',
+    Properties: {
+      Handler: index.Handler,
+      Role: cf.ref(prefixed('ScalingMathRole')),
+      Code:
+        ZipFile: cf.sub(`
+          var response = require('cfn-response');
+          exports.handler = function(event,context){
+            var result = Math.min(parseInt(${options.ResourceProperties.max}) / 10, 100)
+            response.send(event, context, response.SUCCESS, {Value: Result})
+          }
+          `),
+      Runtime: nodejs
+    }
+  },
+  customMathResource: {
+    Type: 'AWS::CloudFormation::CustomResource',
+    Properties: {
+      ServiceToken: cf.getAtt(prefixed('MathLambda'), 'Arn'),
+      max: cf.ref('maxSize')
+    }
+  }
 };
 
 const watcher = watchbot.template({
@@ -19,4 +60,16 @@ const watcher = watchbot.template({
   notificationEmail: 'devnull@mapbox.com'
 });
 
-module.exports = cf.merge({ Parameters }, watcher);
+
+
+
+
+
+
+
+
+
+
+
+
+module.exports = cf.merge({ Parameters }, { Resources }, watcher);
