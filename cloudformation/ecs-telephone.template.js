@@ -5,7 +5,7 @@ const Parameters = {
   GitSha: { Type: 'String' },
   Cluster: { Type: 'String' },
   Family: { Type: 'String' },
-  maxSize: { Type: 'Number' }
+  maxSize: { Type: 'String' }
 };
 
 const watcher = watchbot.template({
