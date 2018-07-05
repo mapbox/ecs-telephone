@@ -8,47 +8,6 @@ const Parameters = {
   maxSize: { Type: 'Number' }
 };
 
-const Resources = {
-  MathRole: {
-    Type: 'AWS::IAM::Role',
-    Properties: {
-      AssumeRolePolicyDocument: {
-        Statement: [
-          {
-            Effect: 'Allow',
-            Principal: { Service: ['lambda.amazonaws.com'] },
-            Action: ['sts:AssumeRole']
-          }
-        ]
-      }
-    }
-  },
-  MathLambda: {
-    Type: 'AWS::Lambda::Function',
-    Properties: {
-      Handler: 'index.Handler',
-      Role: cf.ref('MathRole'),
-      Code: {
-        ZipFile: cf.sub(`
-          var response = require('cfn-response');
-          exports.handler = function(event,context){
-            var result = Math.min(parseInt(${cf.ref(Parameters.maxSize)}) / 10, 100)
-            response.send(event, context, response.SUCCESS, {Value: Result})
-          }
-          `),
-      },
-      Runtime: 'nodejs6.10'
-    }
-  },
-  customMathResource: {
-    Type: 'AWS::CloudFormation::CustomResource',
-    Properties: {
-      ServiceToken: cf.getAtt('MathLambda', 'Arn'),
-      max: cf.ref('maxSize')
-    }
-  }
-};
-
 const watcher = watchbot.template({
   cluster: cf.ref('Cluster'),
   service: 'ecs-telephone',
@@ -56,6 +15,7 @@ const watcher = watchbot.template({
   serviceVersion: cf.ref('GitSha'),
   command: ['./index.js'],
   minSize: 1,
+  maxSize: cf.ref(maxSize),
   reservation: { cpu: 256, memory: 128 },
   env: { StackRegion: cf.region },
   notificationEmail: 'devnull@mapbox.com'
@@ -73,4 +33,4 @@ const watcher = watchbot.template({
 
 
 
-module.exports = cf.merge({ Parameters }, { Resources }, watcher);
+module.exports = cf.merge({ Parameters }, watcher);
