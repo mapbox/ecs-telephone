@@ -16,7 +16,7 @@ const watcher = watchbot.template({
   command: ['./index.js'],
   minSize: 1,
   maxSize: cf.ref('maxSize'),
-  reservation: { cpu: 256, memory: 128 },
+  reservation: { cpu: 'pizza', memory: 128 },
   env: { StackRegion: cf.region },
   notificationEmail: 'devnull@mapbox.com'
 });
