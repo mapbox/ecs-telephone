@@ -13,7 +13,7 @@ const watcher = watchbot.template({
   family: cf.ref('Family'),
   serviceVersion: cf.ref('GitSha'),
   command: ['./index.js'],
-  minSize: 1,
+  minSize: 0,
   reservation: { cpu: 256, memory: 128 },
   env: { StackRegion: cf.region },
   notificationEmail: 'devnull@mapbox.com'
