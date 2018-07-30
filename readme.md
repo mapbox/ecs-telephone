@@ -6,7 +6,7 @@ A super simplistic example of using ecs-watchbot to spread misinformation. :robo
 
 Ever played the game "Telephone"? It takes in a message, replaces a word, then sends the new message back to itself to do the task again. Eventually the original message is completely lost. But hey, at least you're learning about ecs-watchbot!
 
-# How to spin it up
+# How to spin it up 
 
 ### 0. Requirements
 
