@@ -10,7 +10,7 @@ Ever played the game "Telephone"? It takes in a message, replaces a word, then s
 
 ### 0. Requirements
 
-**cfn-config**: All of this requires you to be authenticated with an AWS account. The following steps will use a tool called `cfn-config`, which enables you to deploy services via cloudformation. [Read the docs](https://github.com/mapbox/cfn-config) on how to set up and authenticate your environment.
+**cfn-config**: All of this re asdfquires you to be authenticated with an AWS account. The following steps will use a tool called `cfn-config`, which enables you to deploy services via cloudformation. [Read the docs](https://github.com/mapbox/cfn-config) on how to set up and authenticate your environment.
 
 **an ECS cluster**: ecs-watchbot requires an ECS cluster to work. Learn more about [ECS clusters on AWS](https://aws.amazon.com/ecs/).  
 
