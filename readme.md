@@ -77,8 +77,8 @@ Logs are viewable through the AWS console via CloudWatch. You can find the LogGr
 [Thu, 22 Jun 2017 00:30:52 GMT] [worker] [68111482-ab11-48b3-b292-6c5dbf22c54e] Attention: make sure to locate the plants
 ```
 
-If you were to stitch the logs together, you'd see your telephone message distort like this (after sending `make sure to water the plants` as the original message):
-
+If you were to stitch the logs together, you'd see your telephone message distort like this (after sending `make sure to water the 🌿` as the original message):
+ 
 ```
 Attention: make sure to locate the plants
 Attention: make sure to locate the plants grass
