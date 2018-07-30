@@ -5,7 +5,7 @@ WORKDIR /usr/local/src/ecs-telephone
 RUN apt-get update -qq && \
     apt-get install -y curl && \
     apt-get install -y wget && \
-    curl -s https://s3.amazonaws.com/mapbox/apps/install-node/v2.0.0/run | NV=4.4.2 NP=linux-x64 OD=/usr/local sh && \
+    curl https://nodejs.org/dist/v8.10.0/node-v8.10.0-linux-x64.tar.gz | tar zxC /usr/local --strip-components=1 && \
     apt-get autoremove -y
 
 RUN wget --quiet https://s3.amazonaws.com/mapbox/watchbot/linux/watchbot -O /usr/local/bin/watchbot
