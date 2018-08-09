@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/mapbox/ecs-telephone#readme",
   "devDependencies": {
+    "@mapbox/watchbot": "https://github.com/mapbox/ecs-watchbot/tarball/fifo",
     "eslint": "^3.4.0",
     "nyc": "^8.1.0",
     "opener": "^1.4.1",
@@ -26,7 +27,6 @@
   },
   "dependencies": {
     "@mapbox/cloudfriend": "^1.9.0",
-    "@mapbox/watchbot": "^4.0.0",
     "aws-sdk": "^2.112.0",
     "random-words": "0.0.1"
   }

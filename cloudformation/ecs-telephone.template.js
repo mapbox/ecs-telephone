@@ -16,7 +16,8 @@ const watcher = watchbot.template({
   minSize: 1,
   reservation: { cpu: 256, memory: 128 },
   env: { StackRegion: cf.region },
-  notificationEmail: 'devnull@mapbox.com'
+  notificationEmail: 'devnull@mapbox.com',
+  fifo: true
 });
 
 module.exports = cf.merge({ Parameters }, watcher);
