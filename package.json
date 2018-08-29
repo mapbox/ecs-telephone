@@ -28,6 +28,6 @@
     "@mapbox/cloudfriend": "^1.9.0",
     "@mapbox/watchbot": "^4.10.0",
     "aws-sdk": "^2.112.0",
-    "random-words": "0.0.1"
+    "rhyme": "0.0.3"
   }
 }
