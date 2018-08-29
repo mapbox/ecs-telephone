@@ -83,7 +83,7 @@ If you were to stitch the logs together, you'd see your telephone message distor
 Attention: make sure to water the plants
 Attention: make sure to SLAUGHTER the plants
 Attention: STEAK sure to SLAUGHTER the plants
-Attention: STEAK sure to SLAUGHTER the GRANTS
+Attention: STEAK sure DO SLAUGHTER the GRANTS
 Attention: STEAK sure DO SLAUGHTER LE GRANTS
 Attention: STEAK FLOOR DO SLAUGHTER LE GRANTS
 Attention: CAKE FLOOR DO SLAUGHTER LE GRANTS
