@@ -80,15 +80,13 @@ Logs are viewable through the AWS console via CloudWatch. You can find the LogGr
 If you were to stitch the logs together, you'd see your telephone message distort like this (after sending `make sure to water the plants` as the original message):
 
 ```
-Attention: make sure to locate the plants
-Attention: make sure to locate the plants grass
-Attention: material sure to locate the plants grass
-Attention: material sure to locate the farther grass
-Attention: material sure union locate the farther grass
-Attention: material sure union locate pale farther grass
-Attention: capital sure union locate pale farther grass
-Attention: capital sure union locate brought farther grass
-Attention: capital sure union locate brought farther grass central
+Attention: make sure to water the plants
+Attention: make sure to SLAUGHTER the plants
+Attention: STEAK sure to SLAUGHTER the plants
+Attention: STEAK sure to SLAUGHTER the GRANTS
+Attention: STEAK sure DO SLAUGHTER LE GRANTS
+Attention: STEAK FLOOR DO SLAUGHTER LE GRANTS
+Attention: CAKE FLOOR DO SLAUGHTER LE GRANTS
 ```
 
 ### 5. Delete the stack
