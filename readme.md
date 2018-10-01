@@ -1,4 +1,4 @@
-# ecs-telephone
+# ecs-telephone ☎️ TEST TEST :telephone: 
 
 A super simplistic example of using ecs-watchbot to spread misinformation. :robot: :telephone:
 
@@ -10,7 +10,7 @@ Ever played the game "Telephone"? It takes in a message, replaces a word, then s
 
 ### 0. Requirements
 
-**cfn-config**: All of this requires you to be authenticated with an AWS account. The following steps will use a tool called `cfn-config`, which enables you to deploy services via cloudformation. [Read the docs](https://github.com/mapbox/cfn-config) on how to set up and authenticate your environment.
+**cfn-config**: All of this re asdfquires you to be authenticated with an AWS account. The following steps will use a tool called `cfn-config`, which enables you to deploy services via cloudformation. [Read the docs](https://github.com/mapbox/cfn-config) on how to set up and authenticate your environment.
 
 **an ECS cluster**: ecs-watchbot requires an ECS cluster to work. Learn more about [ECS clusters on AWS](https://aws.amazon.com/ecs/).
 
@@ -77,8 +77,8 @@ Logs are viewable through the AWS console via CloudWatch. You can find the LogGr
 [Thu, 22 Jun 2017 00:30:52 GMT] [worker] [68111482-ab11-48b3-b292-6c5dbf22c54e] Attention: make sure to locate the plants
 ```
 
-If you were to stitch the logs together, you'd see your telephone message distort like this (after sending `make sure to water the plants` as the original message):
-
+If you were to stitch the logs together, you'd see your telephone message distort like this (after sending `make sure to water the 🌿` as the original message):
+ 
 ```
 Attention: make sure to water the plants
 Attention: make sure to SLAUGHTER the plants
