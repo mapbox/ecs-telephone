@@ -28,7 +28,7 @@ watcher.Resources.WatchbotTask.Properties.Volumes.push({
   Host: {
     SourcePath: '/var'
   },
-  Name: 'docker-sock'
+  Name: 'var'
 });
 
 module.exports = cf.merge({ Parameters }, watcher);
