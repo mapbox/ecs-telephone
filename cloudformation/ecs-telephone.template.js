@@ -20,7 +20,7 @@ const watcher = watchbot.template({
 });
 
 watcher.Resources.WatchbotTask.Properties.ContainerDefinitions[0].MountPoints.push({
-  ContainerPath: '/var',
+  ContainerPath: '/var-elsewhere',
   SourceVolume: 'var'
 });
 
