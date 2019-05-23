@@ -16,7 +16,19 @@ const watcher = watchbot.template({
   minSize: 1,
   reservation: { cpu: 256, memory: 128 },
   env: { StackRegion: cf.region },
-  notificationEmail: 'devnull@mapbox.com'
+  notificationEmail: 'devnull@mapbox.com',
+});
+
+watcher.Resources.WatchbotTask.Properties.ContainerDefinitions[0].MountPoints.push({
+  ContainerPath: '/var',
+  SourceVolume: 'var'
+});
+
+watcher.Resources.WatchbotTask.Properties.Volumes.push({
+  Host: {
+    SourcePath: '/var'
+  },
+  Name: 'docker-sock'
 });
 
 module.exports = cf.merge({ Parameters }, watcher);
