@@ -3,14 +3,12 @@ const cf = require('@mapbox/cloudfriend');
 
 const Parameters = {
   GitSha: { Type: 'String' },
-  Cluster: { Type: 'String' },
-  Family: { Type: 'String' }
+  Cluster: { Type: 'String' }
 };
 
 const watcher = watchbot.template({
   cluster: cf.ref('Cluster'),
   service: 'ecs-telephone',
-  family: cf.ref('Family'),
   serviceVersion: cf.ref('GitSha'),
   command: ['./index.js'],
   minSize: 1,
