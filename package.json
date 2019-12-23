@@ -26,7 +26,7 @@
     "tape": "^4.11.0"
   },
   "dependencies": {
-    "@mapbox/watchbot": "^4.17.0",
+    "@mapbox/watchbot": "^4.20.0",
     "aws-sdk": "^2.521.0",
     "rhyme": "0.0.3"
   }
