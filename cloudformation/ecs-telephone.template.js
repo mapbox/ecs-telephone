@@ -14,7 +14,7 @@ const watcher = watchbot.template({
   serviceVersion: cf.ref('GitSha'),
   command: ['./index.js'],
   minSize: 1,
-  reservation: { cpu: 256, memory: 128 },
+  reservation: { cpu: 256, memoryReservation: 128 },
   env: { StackRegion: cf.region },
   notificationEmail: 'devnull@mapbox.com'
 });
