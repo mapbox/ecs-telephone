@@ -20,14 +20,31 @@
   "homepage": "https://github.com/mapbox/ecs-telephone#readme",
   "devDependencies": {
     "@mapbox/cloudfriend": "^3.1.1",
-    "eslint": "^5.16.0",
     "nyc": "^14.1.1",
     "opener": "^1.5.1",
-    "tape": "^4.11.0"
+    "tape": "^4.11.0",
+    "eslint": "^6.5.1"
   },
   "dependencies": {
+    "@mapbox/dyno": "^1.4.2",
     "@mapbox/watchbot": "^4.20.0",
     "aws-sdk": "^2.521.0",
+    "node-cleanup": "^2.1.2",
+    "p-queue": "^6.2.1",
     "rhyme": "0.0.3"
+  },
+  "eslintConfig": {
+    "extends": [
+      "@mapbox/eslint-config-mapbox",
+      "eslint-config-prettier"
+    ],
+    "overrides": [
+      {
+        "files": "**.test.js",
+        "env": {
+          "jest": true
+        }
+      }
+    ]
   }
 }
