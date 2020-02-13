@@ -10,3 +10,4 @@ const message = process.env.Message;
 const sns = new AWS.SNS({ region });
 
 const file = require("./file");
+file();
