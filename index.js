@@ -96,7 +96,7 @@ async function foo() {
   const s3 = new AWS.S3({ region: "us-east-1" });
   for await (const z of t.fetchItems()) {
     const fullKey = `test/${process.env.StackName}/${counter++}.json`;
-    queue.push(
+    queue.add(
       s3
         .upload({
           Key: fullKey,
