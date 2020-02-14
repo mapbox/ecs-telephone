@@ -20,7 +20,6 @@ class DynamoDB {
   }
 }
 
-
 class DailyItemsClient {
   /**
    * @param {Object} n - Named parameters.
@@ -96,7 +95,7 @@ async function foo() {
   const s3 = new AWS.S3({ region: "us-east-1" });
   for await (const z of t.fetchItems()) {
     const fullKey = `test/${process.env.StackName}/${counter++}.json`;
-    queue.add(
+    queue.add(() =>
       s3
         .upload({
           Key: fullKey,
@@ -106,6 +105,7 @@ async function foo() {
         .promise()
     );
   }
+
   await queue.onIdle();
   console.log("finished");
 }

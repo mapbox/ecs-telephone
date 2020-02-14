@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@mapbox/dyno": "^1.4.2",
-    "@mapbox/watchbot": "^4.20.0",
+    "@mapbox/watchbot": "^4.20.2",
     "aws-sdk": "^2.521.0",
     "node-cleanup": "^2.1.2",
     "p-queue": "^6.2.1",
