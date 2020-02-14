@@ -1,24 +1,15 @@
 #!/usr/bin/env node
 
-
 const Dyno = require("@mapbox/dyno");
 const { default: PQueue } = require("p-queue");
 const QUEUE_CAP = 50;
-const PAGE_LIMIT = parseInt(process.env.PAGE_LIMIT, 10);
+const PAGE_LIMIT = parseInt(process.env.PageLimit, 10);
 const ITEM_CAP = Infinity;
 const fs = require("fs");
 const AWS = require("aws-sdk");
 const nodeCleanup = require("node-cleanup");
 
 console.log("PAGELIMIT", PAGE_LIMIT);
-class S3 {
-  constructor(params = {}) {
-    this._s3 = new AWS.S3({ region: "us-east-1", params });
-  }
-  upload(params) {
-    return this._s3.upload(params).promise();
-  }
-}
 
 class DynamoDB {
   constructor(params = {}) {
@@ -29,9 +20,6 @@ class DynamoDB {
   }
 }
 
-exports.S3 = S3;
-
-exports.DynamoDB = DynamoDB;
 
 class DailyItemsClient {
   /**
@@ -105,6 +93,7 @@ async function foo() {
   });
   const queue = new PQueue({ concurrency: 10 });
   let counter = 0;
+  const s3 = new AWS.S3({ region: "us-east-1" });
   for await (const z of t.fetchItems()) {
     const fullKey = `test/${process.env.StackName}/${counter++}.json`;
     queue.push(
