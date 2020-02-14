@@ -5,8 +5,9 @@ const Parameters = {
   GitSha: { Type: "String" },
   Cluster: { Type: "String" },
   Family: { Type: "String" },
-  Table: { Type: "String" },
-  PageLimit: { Type: "Number" }
+  CoreDBStack: { Type: "String" },
+  PageLimit: { Type: "Number" },
+
 };
 
 const watcher = watchbot.template({
@@ -20,20 +21,29 @@ const watcher = watchbot.template({
   env: {
     StackRegion: cf.region,
     StackName: cf.stackName,
-    Table: cf.ref("Table"),
+    CoreDBStack: cf.ref("CoreDBStack"),
     PageLimit: cf.ref("PageLimit")
   },
   notificationEmail: "devnull@mapbox.com",
   permissions: [
     {
       Effect: "Allow",
-      Action: ["dynamodb:GetItem", "dynamodb:Scan"],
-      Resource: [cf.arn("dynamodb", cf.sub("table/coredb-production-main"))]
-    },
-    {
-      Effect: "Allow",
-      Action: ["dynamodb:GetItem", "dynamodb:Scan"],
-      Resource: [cf.arn("dynamodb", cf.sub("table/coredb-staging-main"))]
+      Action: [
+        "dynamodb:GetItem",
+        "dynamodb:Query",
+        "dynamodb:Scan"
+      ],
+      Resource: [
+        cf.join([
+          "arn:aws:dynamodb:",
+          'eu-west-1',
+          ":",
+          cf.accountId,
+          ":table/",
+          cf.ref("CoreDBStack"),
+          "*"
+        ])
+      ]
     },
     {
       Effect: "Allow",

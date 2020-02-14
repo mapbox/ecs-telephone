@@ -101,7 +101,7 @@ class DailyItemsClient {
 
 async function foo() {
   let t = new DailyItemsClient({
-    statisticsTableName: process.env.Table
+    statisticsTableName: process.env.CoreDBStack
   });
   const queue = new PQueue({ concurrency: 10 });
   let counter = 0;
