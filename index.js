@@ -2,7 +2,7 @@
 
 const Dyno = require("@mapbox/dyno");
 const { default: PQueue } = require("p-queue");
-const QUEUE_CAP = 30;
+const QUEUE_CAP = 20;
 const PAGE_LIMIT = parseInt(process.env.PageLimit, 10);
 const ITEM_CAP = Infinity;
 const fs = require("fs");
@@ -94,8 +94,8 @@ async function foo() {
   let counter = 0;
   const s3 = new AWS.S3({ region: "us-east-1" });
   for await (const z of t.fetchItems()) {
-    console.log("doing ", counter);
-    const fullKey = `test/${process.env.StackName}/${counter++}.json`;
+    const fullKey = `test/${process.env.StackName}/new/${z.id +
+      z.collection}.json`;
     queue.add(() =>
       s3
         .upload({
