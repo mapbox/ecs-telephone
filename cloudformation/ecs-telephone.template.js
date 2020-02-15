@@ -12,6 +12,7 @@ const Parameters = {
 
 const watcher = watchbot.template({
   cluster: cf.ref("Cluster"),
+  errorThreshold: 1,
   service: "ecs-telephone",
   family: cf.ref("Family"),
   serviceVersion: cf.ref("GitSha"),
