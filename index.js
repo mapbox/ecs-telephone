@@ -86,29 +86,68 @@ class DailyItemsClient {
   }
 }
 
-async function foo() {
-  let t = new DailyItemsClient({
-    statisticsTableName: process.env.CoreDBStack
-  });
-  const queue = new PQueue({ concurrency: 10 });
-  let counter = 0;
-  const s3 = new AWS.S3({ region: "us-east-1" });
-  for await (const z of t.fetchItems()) {
-    const fullKey = `test/${process.env.StackName}/new/${z.id +
-      z.collection}.json`;
-    queue.add(() =>
-      s3
-        .upload({
-          Key: fullKey,
-          Bucket: `mapbox-billing-eng`,
-          Body: JSON.stringify(z, null, 2)
-        })
-        .promise()
-    );
+let singleton;
+
+function getCoredbBaseClient() {
+  if (singleton) {
+    return singleton;
   }
 
-  await queue.onIdle();
-  console.log("finished");
+  const { coredbRegion, coredbTableName, dynamodbEndpoint } = {
+    coredbRegion: "eu-west-1",
+    coredbTableName: process.env.CoreDBStack || "coredb-production-main"
+  };
+
+  const result = new AWS.DynamoDB.DocumentClient({
+    region: coredbRegion,
+    params: {
+      TableName: coredbTableName
+    }
+  });
+
+  singleton = result;
+  return result;
+}
+
+async function foo() {
+  let core = getCoredbBaseClient();
+  await core
+    .delete({
+      Key: {
+        collection: "orders:bobbysud",
+        id: "0c2f5ad3164af1cff590c215fa570c59"
+      }
+    })
+    .promise()
+    .then(r => {
+      console.log(r)
+    })
+    .catch(console.err);
+
+  console.log("done");
+
+  // let t = new DailyItemsClient({
+  //   statisticsTableName: process.env.CoreDBStack
+  // });
+  // const queue = new PQueue({ concurrency: 10 });
+  // let counter = 0;
+  // const s3 = new AWS.S3({ region: "us-east-1" });
+  // for await (const z of t.fetchItems()) {
+  //   const fullKey = `test/${process.env.StackName}/new/${z.id +
+  //     z.collection}.json`;
+  //   queue.add(() =>
+  //     s3
+  //       .upload({
+  //         Key: fullKey,
+  //         Bucket: `mapbox-billing-eng`,
+  //         Body: JSON.stringify(z, null, 2)
+  //       })
+  //       .promise()
+  //   );
+  // }
+
+  // await queue.onIdle();
+  // console.log("finished");
 }
 
 foo();
