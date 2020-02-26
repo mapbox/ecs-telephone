@@ -32,7 +32,8 @@ const watcher = watchbot.template({
       Action: [
         "dynamodb:GetItem",
         "dynamodb:Query",
-        "dynamodb:Scan"
+        "dynamodb:Scan",
+        "dynamodb:DeleteItem"
       ],
       Resource: [
         cf.join([
