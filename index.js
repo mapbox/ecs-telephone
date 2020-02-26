@@ -110,44 +110,28 @@ function getCoredbBaseClient() {
 }
 
 async function foo() {
+  const queue = new PQueue({ concurrency: 10 });
+
   let core = getCoredbBaseClient();
-  await core
-    .delete({
-      Key: {
-        collection: "orders:bobbysud",
-        id: "0c2f5ad3164af1cff590c215fa570c59"
-      }
-    })
-    .promise()
-    .then(r => {
-      console.log(r)
-    })
-    .catch(console.err);
 
-  console.log("done");
 
-  // let t = new DailyItemsClient({
-  //   statisticsTableName: process.env.CoreDBStack
-  // });
-  // const queue = new PQueue({ concurrency: 10 });
-  // let counter = 0;
-  // const s3 = new AWS.S3({ region: "us-east-1" });
-  // for await (const z of t.fetchItems()) {
-  //   const fullKey = `test/${process.env.StackName}/new/${z.id +
-  //     z.collection}.json`;
-  //   queue.add(() =>
-  //     s3
-  //       .upload({
-  //         Key: fullKey,
-  //         Bucket: `mapbox-billing-eng`,
-  //         Body: JSON.stringify(z, null, 2)
-  //       })
-  //       .promise()
-  //   );
-  // }
+  let counter = 0;
+  require("./payload").forEach(item =>
+    queue.add(() =>
+      core
+        .delete({
+          Key: item
+        })
+        .promise()
+        .then(r => {
+          counter++;
+          console.log("done", item.id);
+        })
+    )
+  );
 
-  // await queue.onIdle();
-  // console.log("finished");
+  await queue.onIdle();
+  console.log("finished", counter);
 }
 
 foo();
