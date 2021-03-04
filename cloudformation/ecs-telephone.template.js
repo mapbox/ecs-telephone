@@ -9,6 +9,7 @@ const Parameters = {
 
 const watcher = watchbot.template({
   cluster: cf.ref('Cluster'),
+  capacity: 'FARGATE_SPOT',
   service: 'ecs-telephone',
   family: cf.ref('Family'),
   serviceVersion: cf.ref('GitSha'),
